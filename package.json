@@ -10,9 +10,10 @@
   "version": "1.0.0",
   "description": "An educational project that demonstrates the use of server sent events in Node JS. The project is about investing in Gold based on live prices (algorithimcally generated). ",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
