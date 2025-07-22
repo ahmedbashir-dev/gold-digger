@@ -33,8 +33,21 @@ eventSource.onerror = () => {
 
 const form = document.getElementById("investForm");
 const button = document.getElementById('invest-btn');
+//Dialog references
+const dialog = document.querySelector('dialog.outputs');
+const dialogSummary = document.getElementById('investment-summary');
+const okButton = dialog.querySelector('button');
+
+function showPurchaseSummary(ounces, amount){
+    dialogSummary.textContent = `You just bought ${ounces} ounces (Oz) for £${amount}. You will receive documentation shortly.`;
+    dialog.showModal();
+}
+
+okButton.addEventListener('click', ()=> dialog.close());
+
+
 form.addEventListener('submit', async function(event){
-    console.log("Submit Triggered");
+    
     event.preventDefault();
     const investmentAmount = document.getElementById('investment-amount').value;
     const dateTime = new Date().toISOString();
@@ -61,6 +74,7 @@ form.addEventListener('submit', async function(event){
         });
         if(response.ok){
             form.reset();
+            showPurchaseSummary(goldSold,investmentAmount);
         }
         else{
             console.error(response.statusText);
@@ -70,4 +84,5 @@ form.addEventListener('submit', async function(event){
         console.error("Error", err);
     }
 
-})
+});
+
