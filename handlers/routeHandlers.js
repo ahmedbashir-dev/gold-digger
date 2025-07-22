@@ -1,4 +1,6 @@
 import { getGoldPrice } from "../data/getGoldPrice.js";
+import { investmentEvent } from "../events/goldPriceEvent.js";
+import { parseJsonBody } from "../utils/parseJsonBody.js";
 import { sendResponse } from "../utils/sendResponse.js";
 
 export async function handleGet(res) {
@@ -33,4 +35,15 @@ export async function handleGoldPrice(req, res) {
         clearInterval(intervalId);
         res.end();
     })
+}
+
+export async function handlePost(req, res){
+    try{
+        const parsedBody = await parseJsonBody(req);
+        investmentEvent.emit('investment-added', parsedBody);
+        sendResponse(res, 201, 'application/json', JSON.stringify(parsedBody));
+    }
+    catch(err){
+        sendResponse(res, 400, 'application/json', JSON.stringify({error:err}));
+    }
 }

@@ -1,7 +1,7 @@
 import http from "node:http";
 import { serveStatic } from "./utils/serveStatic.js";
 import { sendResponse } from "./utils/sendResponse.js";
-import { handleGet, handleGoldPrice } from "./handlers/routeHandlers.js";
+import { handleGet, handleGoldPrice, handlePost } from "./handlers/routeHandlers.js";
 
 
 const PORT = 8000;
@@ -15,7 +15,7 @@ const server = http.createServer(async (req, res) => {
             await handleGet(res);
         }
         else if(req.method === 'POST'){
-            
+            await handlePost(req, res);
         }
         else{
             sendResponse(res, 405, 'text/html', `<h1>Method Not Allowed</h1>`)

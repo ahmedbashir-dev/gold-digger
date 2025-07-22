@@ -22,13 +22,14 @@
             <p>£<span id="price-display" class="price" aria-live="assertive">----.--</span> / Oz*</p>
             <p id="connection-status" class="status" aria-live="polite">Disconnected 🔴 </p>
         </section>
-        <form>
+        <form id="investForm">
             <label for="investment-amount">Amount to invest</label>
             <div class="input-container">
                 <div class="currency">£</div>
                 <input type="number" id="investment-amount" placeholder="100.00" required>
+                <input type="hidden" id="price-per-oz" />
             </div>
-            <button id="invest-btn" class="invest-btn" aria-label="Invest in gold now">Invest Now!</button>
+            <button id="invest-btn" form="investForm" class="invest-btn" aria-label="Invest in gold now">Invest Now!</button>
         </form>
         <!-- This dialog opens after a successful purchase -->
         <dialog class="outputs" role="dialog" aria-labelledby="dialog-title" aria-describedby="investment-summary" lang="en">
