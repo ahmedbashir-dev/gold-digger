@@ -204,3 +204,11 @@ dialog button {
             #666);
     opacity: 0.50;
 }
+
+.status.online{
+    color:green;
+}
+
+.status.offline{
+    color:red;
+}
