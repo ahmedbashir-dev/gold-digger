@@ -1,4 +1,5 @@
 import { getGoldPrice } from "../data/getGoldPrice.js";
+import { generatePdfEvent } from "../events/generatePDFEvent.js";
 import { investmentEvent } from "../events/goldPriceEvent.js";
 import { parseJsonBody } from "../utils/parseJsonBody.js";
 import { sendResponse } from "../utils/sendResponse.js";
@@ -41,6 +42,7 @@ export async function handlePost(req, res){
     try{
         const parsedBody = await parseJsonBody(req);
         investmentEvent.emit('investment-added', parsedBody);
+        generatePdfEvent.emit('generate-pdf', parsedBody);
         sendResponse(res, 201, 'application/json', JSON.stringify(parsedBody));
     }
     catch(err){
